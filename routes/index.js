@@ -5,19 +5,18 @@ module.exports = exports = function(app, db) {
 
     var contentHandler = new ContentHandler(db);
 
-    // Displays the form allowing a user to add a new post.
-    app.get('/posts', contentHandler.displayMainPage);	
-	app.get('/posts/:id', contentHandler.getPostsByChannel);
-    app.delete('/delete/:postId', contentHandler.deletePost);
-	app.post('/new-post', contentHandler.handleNewPost);
-	app.post('/edit-post', contentHandler.handleEditPost);
-	
-	app.get('/user/:id', contentHandler.getUserChannels);
+    app.get('/post', contentHandler.displayMainPage);
+	app.get('/post/:id', contentHandler.getPostsByChannel);
+    app.delete('/post/:id/delete', contentHandler.deletePost);
+	app.post('/post/new-post', contentHandler.handleNewPost);
+	app.post('/post/edit-post', contentHandler.handleEditPost);
+
+    app.get('/user', contentHandler.getUsers);
+    app.get('/user/:id', contentHandler.getUserChannels);
 	app.post('/user/:id/read-post', contentHandler.readPost);
 	app.post('/user/:id/unread-post', contentHandler.unreadPost);
-	app.get('/users', contentHandler.getUsers);
-	app.post('/new-user', contentHandler.handleNewUser);
-	app.post('/edit-user', contentHandler.handleEditUser);
+	app.post('/user/new-user', contentHandler.handleNewUser);
+	app.post('/user/edit-user', contentHandler.handleEditUser);
 	
     // Error handling middleware
     app.use(ErrorHandler);

@@ -32,7 +32,6 @@
     "phantomjs": "^1.9.18",
     "bcrypt-nodejs": "~0.0.3",
     "consolidate": "~0.9.1",
-    "ejs": "^2.3.4",
     "express": "~3.5",
     "gulp": "^3.9.0",
     "gulp-util": "^3.0.7",

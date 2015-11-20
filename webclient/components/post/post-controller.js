@@ -25,7 +25,9 @@ Application.Controllers
 		
 		$scope.reset = function() {				
 			$scope.post = angular.copy(postService.new());
-			$scope.postForm.$setUntouched();
+            if($scope.postForm){
+                $scope.postForm.$setUntouched();
+            }
 		};
 		
 		$scope.edit = function(post) {	

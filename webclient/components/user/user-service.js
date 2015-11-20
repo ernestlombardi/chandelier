@@ -15,7 +15,7 @@ Application.Services.service("userService",
         };		
 		
 		userService.getUsers = function () {
-			var getUsers = $resource("/api/users", {}, {"get": {method: "GET", isArray: true}});
+			var getUsers = $resource("/api/user", {}, {"get": {method: "GET", isArray: true}});
 			userService.result = getUsers.get();
 			userService.result.$promise.then(function () {
 				$rootScope.$broadcast("HandleGetUsers");
@@ -24,9 +24,9 @@ Application.Services.service("userService",
 		};
 		
 		userService.update = function (user) {				
-			var updateUser = $resource("/api/new-user", {}, {"post": {method: "POST", request: user, isArray: true}});
+			var updateUser = $resource("/api/user/new-user", {}, {"post": {method: "POST", request: user, isArray: true}});
 			if(user._id){
-				updateUser = $resource("/api/edit-user", {}, {"post": {method: "POST", request: user, isArray: true}});
+				updateUser = $resource("/api/user/edit-user", {}, {"post": {method: "POST", request: user, isArray: true}});
 			}
 			userService.result = updateUser.post(user);
 			userService.result.$promise.then(function () {
