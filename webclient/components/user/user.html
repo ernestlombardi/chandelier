@@ -1,0 +1,33 @@
+<form id="user" name="userForm" layout="column" flex layout-align="start center" novalidate>	
+	<div layout="row" layout-fill>		
+		<div style="width: 40%;margin-right: 20px;">
+			<h4>Manage Users</h4>
+			<md-input-container layout-fill>
+				<label>User</label>
+				<input type="text" name="user" ng-model="user.name" md-maxlength="150" required>		
+			</md-input-container>		
+		</div>
+		<div style="width: 60%;">
+			<h4>Channels</h4>
+			<md-chips
+			ng-model="user.channels"
+			readonly="user.readonly"
+			placeholder="Enter a channel"
+			delete-button-label="Remove Channel"
+			delete-hint="Press delete to remove channel"
+			secondary-placeholder="+Channel" required></md-chips>
+		</div>
+	</div>
+	<br><br>
+	<div layout="row" layout-fill layout-align="end center">
+		<md-button ng-click="update()" class="md-raised md-button md-primary" ng-disabled="userForm.$invalid || userForm.$pristine">Save</md-button>
+		<md-button ng-click="reset()" class="md-button">Reset</md-button>
+	</div>
+	<br><br>			
+</form>
+<hr>
+<div ng-repeat="user in users">
+	<strong>{{user.name}}</strong>
+	<div ng-repeat="c in user.channels">{{c}}</div>
+	<hr>
+</div>

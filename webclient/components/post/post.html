@@ -1,0 +1,28 @@
+<div class="post">
+    <md-toolbar layout="row" class="md-accent">
+        <div class="md-toolbar-tools">
+            <h4>{{post.title}}</h4>	
+        </div>
+    </md-toolbar>	
+	<div layout="row" layout-align="space-between start">
+        <div class="md-padding" flex="60">
+            <md-whiteframe class="md-whiteframe-2dp" flex="100" layout>
+                <div class="md-padding">
+                    {{post.body}}
+                </div>
+            </md-whiteframe>
+        </div>
+		<div flex="40">
+			<p>Sticky: {{post.sticky}}</p>	
+			<p>Created: <em>{{post.createDate | date : 'medium' }}</em></p>
+			<p>Published: <em>{{post.publishDate | date : 'medium' }}</em></p>
+			<p>Expires: <em>{{post.expireDate | date : 'medium' }}</em></p>
+			<p>
+				Published To:
+				<ul>
+					<li ng-repeat="channel in post.channels">{{channel}}</li>
+				</ul>
+			</p>		
+		</div>	
+	</div>	
+</div>
