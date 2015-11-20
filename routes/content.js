@@ -12,14 +12,14 @@ function ContentHandler (db) {
 	this.deletePost = function(req, res, next) {
         "use strict";
 		
-        var postId = req.params.postId;
+        var postId = req.params.id;
 		
         posts.deleteEntry(postId, function(err, result) {
             "use strict";
             
 			if (err) return next(err);
 			
-			return res.send([{response: 'post delete: done'}]);
+			return res.send([{response: 'post delete: done' + result}]);
         });
     };
 	

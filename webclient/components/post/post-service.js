@@ -7,9 +7,9 @@ Application.Services.service("postService",
         var postService = {};		
 		
 		postService.update = function (post) {				
-			var updatePost = $resource("/api/new-post", {}, {"post": {method: "POST", request: post, isArray: true}});
+			var updatePost = $resource("/api/post/new-post", {}, {"post": {method: "POST", request: post, isArray: true}});
 			if(post._id){
-				updatePost = $resource("/api/edit-post", {}, {"post": {method: "POST", request: post, isArray: true}});
+				updatePost = $resource("/api/post/edit-post", {}, {"post": {method: "POST", request: post, isArray: true}});
 			}
 			postService.result = updatePost.post(post);
 			postService.result.$promise.then(function () {
@@ -19,8 +19,8 @@ Application.Services.service("postService",
         };
 
 		postService.delete = function (postId) {
-			var deletePost = $resource("/api/delete/:postId", {postId: "@id"}, {"delete": {method: "DELETE", isArray: true}});
-			postService.result = deletePost.delete({postId: postId});
+			var deletePost = $resource("/api/post/:id/delete", {id: "@id"}, {"delete": {method: "DELETE", isArray: true}});
+			postService.result = deletePost.delete({id: postId});
 			postService.result.$promise.then(function () {
 				postService.getPosts();
 			});			
@@ -41,7 +41,7 @@ Application.Services.service("postService",
         };
 		
 		postService.getPosts = function () {
-			var getPosts = $resource("/api/posts", {}, {"get": {method: "GET", isArray: true}});
+			var getPosts = $resource("/api/post", {}, {"get": {method: "GET", isArray: true}});
 			postService.result = getPosts.get();
 			postService.result.$promise.then(function () {
 				$rootScope.$broadcast("HandleGetPosts");
@@ -50,7 +50,7 @@ Application.Services.service("postService",
 		};
 		
 		postService.getPostsByChannels = function (id, channels) {		
-			var getPosts = $resource("/api/posts/:id", {id: id, channels: "@channels"}, {"get": {method: "GET", request: channels, isArray: true}});
+			var getPosts = $resource("/api/post/:id", {id: id, channels: "@channels"}, {"get": {method: "GET", request: channels, isArray: true}});
 			postService.result = getPosts.get({channels: channels});
 			postService.result.$promise.then(function () {
 				$rootScope.$broadcast("HandleGetPosts");
