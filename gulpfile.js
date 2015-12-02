@@ -113,13 +113,13 @@ gulp.task("preprocessHTML", function () {
 // Run local server with watches on specified flies
 gulp.task("browser-sync", function () {
     var files = [
-        "**/*.html",
-        "styles/**/*.*",
-        "images/**/*.png",
-        "scripts/**/*.js",
-        "components/**/*.html",
-        "components/**/*.js",
-        "!components/**/*-spec.js"
+        "webclient/**/*.html",
+        "webclient/styles/**/*.*",
+        "webclient/images/**/*.png",
+        "webclient/scripts/**/*.js",
+        "webclient/components/**/*.html",
+        "webclient/components/**/*.js",
+        "!webclient/components/**/*-spec.js"
     ];
 
     var proxyOptions = url.parse("http://localhost:8082/");
@@ -132,10 +132,10 @@ gulp.task("browser-sync", function () {
         }
     });
 
-    gulp.watch("components/**/*.less", ["less"]);
-    gulp.watch("styles/*.less", ["less"]);
-    gulp.watch("scripts/**/*.js", ["lint", "scripts", "copy"]);
-    gulp.watch("components/**/*.js", ["lint", "scripts", "copy"]);
+    gulp.watch("webclient/components/**/*.less", ["less"]);
+    gulp.watch("webclient/styles/*.less", ["less"]);
+    gulp.watch("webclient/scripts/**/*.js", ["lint", "scripts", "copy"]);
+    gulp.watch("webclient/components/**/*.js", ["lint", "scripts", "copy"]);
 });
 
 // Karma test runner
