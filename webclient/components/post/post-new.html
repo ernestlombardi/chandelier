@@ -5,18 +5,20 @@
 			<md-input-container layout-fill>
 				<label>Title</label>
 				<input type="text" name="title" ng-model="post.title" md-maxlength="150" required>
+				<!--
 				<div ng-messages="postForm.title.$error">
 					<div ng-message="required">This is required.</div>
 					<div ng-message="md-maxlength">The name has to be less than 150 characters long.</div>
 				</div>
+				-->
 			</md-input-container>
 			<md-input-container layout-fill>
 				<label>Body</label>
 				<textarea columns="1" name="body" ng-model="post.body" md-maxlength="500" required></textarea>
-				<div ng-messages="postForm.body.$error">
+				<!--<div ng-messages="postForm.body.$error">
 					<div ng-message="required">This is required.</div>
 					<div ng-message="md-maxlength">The name has to be less than 500 characters long.</div>
-				</div>
+				</div>-->
 			</md-input-container>
 		</div>
 		<div style="width: 40%;">

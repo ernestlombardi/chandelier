@@ -131,7 +131,8 @@ gulp.task("browser-sync", function () {
             middleware: [proxy(proxyOptions)]
         }
     });
-
+    
+    gulp.watch("webclient/components/**/*.html", ["copy"]);
     gulp.watch("webclient/components/**/*.less", ["less"]);
     gulp.watch("webclient/styles/*.less", ["less"]);
     gulp.watch("webclient/scripts/**/*.js", ["lint", "scripts", "copy"]);
