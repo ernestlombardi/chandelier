@@ -1,23 +1,23 @@
 "use strict";
 
 var browserSync = require("browser-sync");
+var concat = require("gulp-concat");
 var del = require("del");
 var gulp = require("gulp");
-var concat = require("gulp-concat");
+var gutil = require("gulp-util");
 var htmlreplace = require("gulp-html-replace");
 var jasmine = require("gulp-jasmine");
 var jshint = require("gulp-jshint");
-var less = require("gulp-less");
-var ngHtml2Js = require("gulp-ng-html2js");
-var rename = require("gulp-rename");
-var uglify = require("gulp-uglify");
-var gutil = require("gulp-util");
-var zip = require("gulp-zip");
 var karma = require("karma");
 var karmaParseConfig = require("karma/lib/config").parseConfig;
+var less = require("gulp-less");
+var ngHtml2Js = require("gulp-ng-html2js");
 var path = require("path");
 var proxy = require("proxy-middleware");
+var rename = require("gulp-rename");
+var uglify = require("gulp-uglify");
 var url = require("url");
+var zip = require("gulp-zip");
 
 gulp.task("clean", function () {
     del([
@@ -131,7 +131,7 @@ gulp.task("browser-sync", function () {
             middleware: [proxy(proxyOptions)]
         }
     });
-
+    
     gulp.watch("webclient/components/**/*.html", ["copy"]);
     gulp.watch("webclient/components/**/*.less", ["less"]);
     gulp.watch("webclient/styles/*.less", ["less"]);
