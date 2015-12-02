@@ -1,6 +1,6 @@
-var PostsDAO = require('../posts').PostsDAO
+var PostsDAO = require('./posts-dao').PostsDAO
   , sanitize = require('validator').sanitize // Helper to sanitize form input
-  , UserDAO = require('../user').UserDAO;
+  , UserDAO = require('./user-dao').UserDAO;
 
 /* The ContentHandler must be constructed with a connected db */
 function ContentHandler (db) {

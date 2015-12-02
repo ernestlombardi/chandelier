@@ -1,5 +1,5 @@
-var ContentHandler = require('./content')
-  , ErrorHandler = require('./error').errorHandler;
+var ContentHandler = require('../content-handler')
+  , ErrorHandler = require('../error-handler').errorHandler;
 
 module.exports = exports = function(app, db) {
 
