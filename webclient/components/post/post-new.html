@@ -5,17 +5,17 @@
 			<md-input-container layout-fill>
 				<label>Title</label>
 				<input type="text" name="title" ng-model="post.title" md-maxlength="150" required>
-				<!--
+<!--
 				<div ng-messages="postForm.title.$error">
 					<div ng-message="required">This is required.</div>
 					<div ng-message="md-maxlength">The name has to be less than 150 characters long.</div>
 				</div>
-				-->
+-->
 			</md-input-container>
 			<md-input-container layout-fill>
 				<label>Body</label>
 				<textarea columns="1" name="body" ng-model="post.body" md-maxlength="500" required></textarea>
-				<!--<div ng-messages="postForm.body.$error">
+<!--				<div ng-messages="postForm.body.$error">
 					<div ng-message="required">This is required.</div>
 					<div ng-message="md-maxlength">The name has to be less than 500 characters long.</div>
 				</div>-->
@@ -36,15 +36,15 @@
 	<div layout="row" layout-fill layout-align="space-around center">
 		<div>
 			<h4>Publish Date</h4>
-			<md-datepicker ng-model="post.publishDate" placeholder="Enter date" class="md-primary"></md-datepicker>
+			<md-datepicker ng-model="post.publishDate" placeholder="Enter date"></md-datepicker>
 		</div>
 		<div>
 			<h4>Expiration Date</h4>
-			<md-datepicker ng-model="post.expireDate" placeholder="Enter date" md-min-date="publishDate" class="md-primary"></md-datepicker>
+			<md-datepicker ng-model="post.expireDate" placeholder="Enter date" md-min-date="publishDate"></md-datepicker>
 		</div>
 		<div>
 			<h4>Sticky</h4>
-			<md-switch ng-model="post.sticky" aria-label="Sticky" class="md-primary">
+			<md-switch ng-model="post.sticky" aria-label="Sticky">
 				{{ post.sticky }}
 			</md-switch>
 		</div>
