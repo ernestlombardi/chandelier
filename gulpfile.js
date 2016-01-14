@@ -39,7 +39,6 @@ gulp.task("lint", function () {
 // Process LESS files
 gulp.task("less", function () {
     gulp.src(["styles/*.less",
-            "node_modules/angular-material/angular-material.min.css",
             "webclient/components/**/*.less",
             "webclient/scripts/**/*.less"])
         .pipe(less())
@@ -53,6 +52,8 @@ gulp.task("less", function () {
 gulp.task("copy", function () {
     gulp.src("webclient/components/**/*.html")
         .pipe(gulp.dest(".tmp/components"));
+    gulp.src("node_modules/angular-material/angular-material.css")
+        .pipe(gulp.dest(".tmp/styles"));
     gulp.src("webclient/images/**/*.*")
         .pipe(gulp.dest(".tmp/images"));
     gulp.src("webclient/styles/fonts/**/*.*")
