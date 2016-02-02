@@ -25,6 +25,8 @@ Application.Controllers
 
 		$scope.reset = function() {				
 			$scope.user = angular.copy(userService.new());
-			$scope.userForm.$setUntouched();
+            if($scope.userForm){
+                $scope.userForm.$setUntouched();
+            }
 		};		
 	});
