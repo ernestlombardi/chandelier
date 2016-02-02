@@ -17,7 +17,7 @@ describe("Post Component tests", function() {
 
         $controller("PostCtrl", {$scope: scope, postService: postService});
 
-        $httpBackend.expectGET("/api/posts").respond({});
+        $httpBackend.expectGET("/api/post").respond({});
 
         spyOn(postService, 'delete');
         spyOn(postService, 'new');

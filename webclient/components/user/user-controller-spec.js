@@ -18,7 +18,7 @@ describe("User Component tests", function() {
 
         $controller("UserCtrl", {$scope: scope, userService: userService});
 
-        $httpBackend.expectGET("/api/users").respond({});
+        $httpBackend.expectGET("/api/user").respond({});
 
         spyOn(userService, 'update');
         spyOn(userService, 'new');
