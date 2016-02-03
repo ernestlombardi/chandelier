@@ -25,10 +25,9 @@ module.exports = function (config) {
             ".tmp/templates/templates.min.js",
             "webclient/scripts/app.js",
             "webclient/scripts/controllers.js",
-            "webclient/scripts/*-spec.js",
             "webclient/components/**/*.js",
-            "webclient/components/**/*-spec.js",
             "templates/templates.min.js",
+            "test/unit/*-spec.js"
         ],
 
 
