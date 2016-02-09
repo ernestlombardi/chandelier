@@ -1,5 +1,6 @@
 "use strict";
 
+var protractor = require('gulp-angular-protractor');
 var browserSync = require("browser-sync");
 var concat = require("gulp-concat");
 var del = require("del");
@@ -15,6 +16,7 @@ var ngHtml2Js = require("gulp-ng-html2js");
 var path = require("path");
 var proxy = require("proxy-middleware");
 var rename = require("gulp-rename");
+var Server = require('karma').Server;
 var uglify = require("gulp-uglify");
 var url = require("url");
 var zip = require("gulp-zip");
@@ -28,19 +30,21 @@ gulp.task("clean", function () {
 });
 
 gulp.task("lint", function () {
-    return gulp.src(["webclient/scripts/**/*.js",
-            "!webclient/scripts/*-spec.js",
-            "webclient/components/**/*.js",
-            "!webclient/components/**/*-spec.js"])
+    return gulp.src([
+        "webclient/scripts/**/*.js",
+        "webclient/components/**/*.js"
+        ])
         .pipe(jshint(".jshintrc"))
         .pipe(jshint.reporter("default"));
 });
 
 // Process LESS files
 gulp.task("less", function () {
-    gulp.src(["styles/*.less",
+    gulp.src([
+            "styles/*.less",
             "webclient/components/**/*.less",
-            "webclient/scripts/**/*.less"])
+            "webclient/scripts/**/*.less"
+        ])
         .pipe(less())
         .pipe(concat("style.css"))
         .pipe(gulp.dest(".tmp/styles"))
@@ -73,12 +77,14 @@ gulp.task("htmlreplace", function () {
 
 // Concatenate, rename, and uglify JS dependencies
 gulp.task("lib", function () {
-    return gulp.src(["node_modules/angular/angular.js",
-        "node_modules/angular-animate/angular-animate.js",
-        "node_modules/angular-aria/angular-aria.js",
-        "node_modules/angular-material/angular-material.js",
-        "node_modules/angular-resource/angular-resource.js",
-        "node_modules/angular-route/angular-route.js"])
+    return gulp.src([
+            "node_modules/angular/angular.js",
+            "node_modules/angular-animate/angular-animate.js",
+            "node_modules/angular-aria/angular-aria.js",
+            "node_modules/angular-material/angular-material.js",
+            "node_modules/angular-resource/angular-resource.js",
+            "node_modules/angular-route/angular-route.js"
+        ])
         .pipe(concat("lib.js"))
         .pipe(gulp.dest(".tmp/scripts"))
         .pipe(rename("lib.min.js"))
@@ -88,10 +94,10 @@ gulp.task("lib", function () {
 
 // Concatenate, rename, and uglify application JS
 gulp.task("scripts", function () {
-    return gulp.src(["webclient/scripts/*.js",
-        "!webclient/scripts/*-spec.js",
-        "webclient/components/**/*.js",
-        "!webclient/components/**/*-spec.js"])
+    return gulp.src([
+            "webclient/scripts/*.js",
+            "webclient/components/**/*.js"
+        ])
         .pipe(concat("app.js"))
         .pipe(gulp.dest(".tmp/scripts"))
         .pipe(rename("app.min.js"))
@@ -119,8 +125,7 @@ gulp.task("browser-sync", function () {
         "webclient/images/**/*.png",
         "webclient/scripts/**/*.js",
         "webclient/components/**/*.html",
-        "webclient/components/**/*.js",
-        "!webclient/components/**/*-spec.js"
+        "webclient/components/**/*.js"
     ];
 
     var proxyOptions = url.parse("http://localhost:8082/");
@@ -145,7 +150,6 @@ function runKarma(configFilePath, options, cb) {
 
     configFilePath = path.resolve(configFilePath);
 
-    var server = karma.server;
     var log = gutil.log, colors = gutil.colors;
     var config = karmaParseConfig(configFilePath, {});
 
@@ -153,11 +157,12 @@ function runKarma(configFilePath, options, cb) {
         config[key] = options[key];
     });
 
-    server.start(config, function (exitCode) {
+    var server = new Server(config, function (exitCode) {
         log("Karma has exited with " + colors.red(exitCode));
         cb();
         process.exit(exitCode);
     });
+    server.start();
 }
 
 gulp.task("karma", function (cb) {
@@ -167,14 +172,29 @@ gulp.task("karma", function (cb) {
     }, cb);
 });
 
-gulp.task("test", [
-    "lint",
-    "preprocessHTML",
-    "karma"
-]);
+gulp.task('protractor', function(callback) {
+    gulp
+        .src([
+            'test/e2e/*-spec.js'
+        ])
+        .pipe(protractor({
+            'configFile': 'protractor.conf.js',
+            'debug': false,
+            'autoStartStopServer': true
+        }))
+        .on('error', function(e) {
+            console.log(e);
+        })
+        .on('end', callback);
+});
 
-gulp.task("default",
-    [
+gulp.task("test", [
+        "lint",
+        "preprocessHTML",
+        "karma"
+    ]);
+
+gulp.task("default", [
         "less",
         "lib",
         "scripts",
@@ -183,8 +203,7 @@ gulp.task("default",
         "browser-sync"
     ]);
 
-gulp.task("build",
-    [
+gulp.task("build", [
         "less",
         "lib",
         "scripts",

@@ -1,12 +1,12 @@
 <div>
 	<newpost post=post></newpost>
 	<div ng-repeat="post in posts | orderBy: createDate : true" class="post-wrapper">
-		<post post=post></post>
+		<post post=post id="post_{{post._id}}"></post>
 
 		<div layout="row" layout-fill layout-align="end center">
 			<md-button ng-click="edit(post)" class="md-raised md-button md-secondary">Edit</md-button>
 			<md-button ng-click="copy(post)" class="md-button">Copy</md-button>
-			<md-button ng-click="delete(post._id)" class="md-button md-warn">Delete</md-button>
+			<md-button ng-click="delete(post._id);$event.stopPropagation();" class="md-button md-warn">Delete</md-button>
 		</div>
 	</div>
 </div>
