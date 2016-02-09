@@ -27,29 +27,33 @@ describe('Posts', function () {
         });
     });
 
-/*    it('should delete a post', function () {
+    it('should delete a post', function () {
+
         var posts = element.all(by.repeater('post in posts'));
+
         var startPostsTotal = 0;
+
         posts.count().then(function (num) {
             startPostsTotal = num;
-            for (i = 0; i < num - 1; i++) {
-                var currentPost = posts.get(i);
-                currentPost.findElement(by.css('h4')).getText().then(function (content) {
-                    if (content.trim() === testTitle) {
-                        currentPost.findElement(by.css('button.md-warn')).click().then(function () {
-                            var titles = element.all(by.binding('post.title')).map(function (elem) {
-                                return elem.getText();
-                            });
-
-                            //Assert test post has been deleted from total number of posts
-                            expect(posts.count()).toEqual(startPostsTotal - 1);
-
-                            //Assert the test post input values are not present in content
-                            expect(titles).not.toContain(testTitle);
-                        });
-                    }
+            var post = element.all(by.repeater('post in posts')).filter(function (post) {
+                return post.element(by.css('h4')).getText().then(function (content) {
+                    return content === testTitle;
                 });
-            }
+            })
+            .first()
+            .element(by.css('.md-warn'))
+            .click()
+            .then(function () {
+                var titles = element.all(by.binding('post.title')).map(function (elem) {
+                    return elem.getText();
+                });
+
+                //Assert test post has been deleted from total number of posts
+                expect(posts.count()).toEqual(startPostsTotal - 1);
+
+                //Assert the test post input values are not present in content
+                expect(titles).not.toContain(testTitle);
+            });
         });
-    });*/
+    });
 });
