@@ -4,9 +4,9 @@
 		<post post=post id="post_{{post._id}}"></post>
 
 		<div layout="row" layout-fill layout-align="end center">
-			<md-button ng-click="edit(post)" class="md-raised md-button md-secondary">Edit</md-button>
-			<md-button ng-click="copy(post)" class="md-button">Copy</md-button>
-			<md-button ng-click="delete(post._id);$event.stopPropagation();" class="md-button md-warn">Delete</md-button>
+			<md-button ng-click="edit(post)" class="md-raised md-button md-secondary edit-post">Edit</md-button>
+			<md-button ng-click="copy(post)" class="md-button copy-post">Copy</md-button>
+			<md-button ng-click="delete(post._id);$event.stopPropagation();" class="md-button md-warn delete-post">Delete</md-button>
 		</div>
 	</div>
 </div>
