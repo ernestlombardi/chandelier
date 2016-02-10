@@ -8,14 +8,11 @@ Application.Controllers
 		
 		$scope.post = angular.copy(postService.new());
 
-        //Set maximum number of posts to show
-        $scope.maxShow = 20;
-		
-		postService.getPosts($scope.maxShow);
+		postService.getPosts();
 
 		$scope.$on("HandlePostSaved", function(){
 			$scope.reset();
-			postService.getPosts();				
+			postService.getPosts();
 		});
 		
 		$scope.$on("HandleGetPosts", function(){

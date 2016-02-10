@@ -40,9 +40,9 @@ Application.Services.service("postService",
 				};
         };
 		
-		postService.getPosts = function (maxShow) {
-			var getPosts = $resource("/api/post", {maxShow: "@maxShow"}, {"get": {method: "GET", request: maxShow, isArray: true}});
-			postService.result = getPosts.get({maxShow: maxShow});
+		postService.getPosts = function () {
+			var getPosts = $resource("/api/post", {}, {"get": {method: "GET", isArray: true}});
+			postService.result = getPosts.get();
 			postService.result.$promise.then(function () {
 				$rootScope.$broadcast("HandleGetPosts");
 			});			
