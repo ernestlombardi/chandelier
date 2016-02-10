@@ -27,6 +27,8 @@ Application.Directives
 			},
             link: function ($scope) {
 
+                postService.getPosts();
+
 				$scope.update = function () {
 					postService.update($scope.post);
 				};	
