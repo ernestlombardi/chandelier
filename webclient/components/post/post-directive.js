@@ -10,8 +10,8 @@ Application.Directives
 			scope: {
 				post: "="
 			},
-            link: function ($scope) {			
-				
+            link: function ($scope) {
+
             }
         };
     })
@@ -25,8 +25,10 @@ Application.Directives
 			scope: {
 				post: "="
 			},
-            link: function ($scope) {			
-						
+            link: function ($scope) {
+
+                postService.getPosts();
+
 				$scope.update = function () {
 					postService.update($scope.post);
 				};	

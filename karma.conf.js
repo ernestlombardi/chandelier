@@ -1,5 +1,6 @@
 // Karma configuration
 // Generated on Thu Jul 02 2015 22:11:09 GMT-0400 (Eastern Daylight Time)
+require('phantomjs-polyfill');
 
 module.exports = function (config) {
     config.set({
@@ -15,6 +16,7 @@ module.exports = function (config) {
 
         // list of files / patterns to load in the browser
         files: [
+            "./node_modules/phantomjs-polyfill/bind-polyfill.js",
             "node_modules/angular/angular.js",
             "node_modules/angular-mocks/angular-mocks.js",
             "node_modules/angular-route/angular-route.js",
@@ -22,7 +24,6 @@ module.exports = function (config) {
             "node_modules/angular-animate/angular-animate.js",
             "node_modules/angular-aria/angular-aria.js",
             "node_modules/angular-material/angular-material.js",
-            ".tmp/templates/templates.min.js",
             "webclient/scripts/app.js",
             "webclient/scripts/controllers.js",
             "webclient/components/**/*.js",
@@ -38,6 +39,7 @@ module.exports = function (config) {
         // preprocess matching files before serving them to the browser
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
         preprocessors: {
+            "webclient/**/*.html": ['ng-html2js'],
             "webclient/scripts/*.js": ["coverage"],
             "webclient/components/**/*.js": ["coverage"]
         },
@@ -77,7 +79,7 @@ module.exports = function (config) {
         // start these browsers
         // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
         browsers: [
-            //"Chrome",
+            "Chrome",
             "PhantomJS"
         ],
 
