@@ -39,6 +39,7 @@
     "morgan": "~1.3.0",
     "path": "^0.12.7",
     "phantomjs": "^1.9.18",
+    "phantomjs-polyfill": "0.0.1",
     "protractor": "^3.0.0",
     "proxy-middleware": "^0.14.0",
     "url": "^0.11.0",

@@ -5,6 +5,8 @@ describe("Access Component tests", function() {
 
     beforeEach(module("app"));
 
+    beforeEach(module('templates'));
+
     beforeEach(function () {
         angular.mock.inject(function ($injector) {
             postService = $injector.get("postService");
