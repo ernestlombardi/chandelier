@@ -8,7 +8,7 @@ Application.Controllers
 		
 		$scope.post = angular.copy(postService.new());
 
-
+		postService.getPosts();
 
 		$scope.$on("HandlePostSaved", function(){
 			$scope.reset();
