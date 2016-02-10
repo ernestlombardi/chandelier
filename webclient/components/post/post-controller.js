@@ -6,9 +6,12 @@ Application.Controllers
     function ($scope, postService) {
         "use strict";       
 		
-		$scope.post = angular.copy(postService.new());		
+		$scope.post = angular.copy(postService.new());
+
+        //Set maximum number of posts to show
+        $scope.maxShow = 20;
 		
-		postService.getPosts();	
+		postService.getPosts($scope.maxShow);
 
 		$scope.$on("HandlePostSaved", function(){
 			$scope.reset();

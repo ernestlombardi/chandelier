@@ -26,7 +26,9 @@ function ContentHandler (db) {
     this.displayMainPage = function(req, res, next) {
         "use strict";
 
-        posts.getPosts(10, function(err, results) {
+        var maxShow = parseInt(req.query.maxShow) || 10;
+
+        posts.getPosts(maxShow, function(err, results) {
             "use strict";
 
             if (err) return next(err);
