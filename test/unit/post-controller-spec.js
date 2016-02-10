@@ -21,7 +21,7 @@ describe("Post Component tests", function() {
 
         spyOn(postService, 'delete');
         spyOn(postService, 'new');
-        spyOn(postService, 'getPosts');
+        spyOn(postService, 'getPosts').and.returnValue({0: "post"});
 
         $templateCache.put("components/post/post-new.html", $templateCache.get("webclient/components/post/post-new.html"));
         el = $compile($templateCache.get("webclient/components/post/post-new.html"))(scope);
@@ -50,6 +50,7 @@ describe("Post Component tests", function() {
         });
 
         it("should define posts when HandleGetPosts is caught", function() {
+            postService.result = "xyz";
             scope.$broadcast("HandleGetPosts");
             expect(scope.posts).toBeDefined();
         });

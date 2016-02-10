@@ -8,7 +8,7 @@ Application.Controllers
 		
 		$scope.post = angular.copy(postService.new());
 
-		postService.getPosts();
+		//postService.getPosts();
 
 		$scope.$on("HandlePostSaved", function(){
 			$scope.reset();
@@ -32,9 +32,16 @@ Application.Controllers
 		
 		$scope.edit = function(post) {	
 			$scope.post = angular.copy(post);			
+
 			//Angular Material Datepicker doesn't like string dates :(
-			$scope.post.publishDate = new Date($scope.post.publishDate);
-			$scope.post.expireDate = new Date($scope.post.expireDate);
+            if($scope.post.publishDate){
+                $scope.post.publishDate = new Date($scope.post.publishDate);
+            }
+
+            if($scope.post.expireDate){
+                $scope.post.expireDate = new Date($scope.post.expireDate);
+            }
+
 		};
 		
 		$scope.copy = function(post) {							
