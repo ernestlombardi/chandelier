@@ -2,7 +2,7 @@
 
 describe("User Component tests", function() {
 
-    var scope, el, userService;
+    var scope, userService;
 
     beforeEach(module("app"));
     beforeEach(module("templates"));
@@ -24,8 +24,8 @@ describe("User Component tests", function() {
         spyOn(userService, 'new');
         spyOn(userService, 'getUsers');
 
-        $templateCache.put("components/user/user.html", $templateCache.get("webclient/components/user/user.html"));
-        el = $compile($templateCache.get("webclient/components/user/user.html"))(scope);
+        $templateCache.put("webclient/components/user/user.html", $templateCache.get("components/user/user.html"));
+        $compile($templateCache.get("webclient/components/user/user.html"))(scope);
 
         scope.$digest();
     }));

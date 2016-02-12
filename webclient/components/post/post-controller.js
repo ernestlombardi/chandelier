@@ -8,8 +8,6 @@ Application.Controllers
 		
 		$scope.post = angular.copy(postService.new());
 
-		//postService.getPosts();
-
 		$scope.$on("HandlePostSaved", function(){
 			$scope.reset();
 			postService.getPosts();
@@ -25,23 +23,16 @@ Application.Controllers
 		
 		$scope.reset = function() {				
 			$scope.post = angular.copy(postService.new());
-            if($scope.postForm){
-                $scope.postForm.$setUntouched();
-            }
+            $scope.postForm.$setUntouched();
+            $scope.postForm.$setPristine();
 		};
 		
 		$scope.edit = function(post) {	
 			$scope.post = angular.copy(post);			
 
 			//Angular Material Datepicker doesn't like string dates :(
-            if($scope.post.publishDate){
-                $scope.post.publishDate = new Date($scope.post.publishDate);
-            }
-
-            if($scope.post.expireDate){
-                $scope.post.expireDate = new Date($scope.post.expireDate);
-            }
-
+            $scope.post.publishDate = $scope.post.publishDate ? new Date($scope.post.publishDate) : null;
+            $scope.post.expireDate = $scope.post.expireDate ? new Date($scope.post.expireDate) : null;
 		};
 		
 		$scope.copy = function(post) {							
@@ -51,4 +42,7 @@ Application.Controllers
 			$scope.post = postCopy;
 		};
 
+        $scope.update = function () {
+            postService.update($scope.post);
+        };
     });
