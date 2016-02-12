@@ -9,10 +9,7 @@ Application.Directives
             templateUrl: "components/post/post.html",
 			scope: {
 				post: "="
-			},
-            link: function ($scope) {
-
-            }
+			}
         };
     })
     .directive("newpost", function ( postService ) {
@@ -26,13 +23,7 @@ Application.Directives
 				post: "="
 			},
             link: function ($scope) {
-
                 postService.getPosts();
-
-				$scope.update = function () {
-					postService.update($scope.post);
-				};	
-				
             }
         };
     });
